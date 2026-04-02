@@ -1,3 +1,15 @@
-.env           # 個人環境の設定（パスワード等）は共有しない
-.DS_Store      # Mac特有のゴミファイル
-/vendor/       # Composerを使う場合
+# 設定・機密情報
+.env
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# Dockerのデータ保持用（もしディレクトリを作っている場合）
+mysql_data/
+
+# Composerを使う場合
+/vendor/
+
+# ログや一時ファイル
+*.log
