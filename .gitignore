@@ -1,0 +1,3 @@
+.env           # 個人環境の設定（パスワード等）は共有しない
+.DS_Store      # Mac特有のゴミファイル
+/vendor/       # Composerを使う場合

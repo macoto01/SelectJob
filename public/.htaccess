@@ -1,0 +1,9 @@
+Options -MultiViews
+RewriteEngine On
+
+# public/ 配下のファイルが実在すればそのまま返す
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# それ以外はすべて index.php へ
+RewriteRule ^ index.php [QSA,L]
