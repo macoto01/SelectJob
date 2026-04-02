@@ -11,5 +11,7 @@ mysql_data/
 # Composerを使う場合
 /vendor/
 
-# ログや一時ファイル
+# --- 開発ツール・ログ ---
 *.log
+.vscode/
+.idea/
