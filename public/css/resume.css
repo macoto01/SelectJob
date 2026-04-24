@@ -1,0 +1,55 @@
+/* public/css/resume.css - 履歴書ページ */
+.resume-pdf-bar { display:flex;gap:8px;justify-content:flex-end;margin-bottom:14px; }
+.btn-pdf { padding:6px 16px;border:1px solid var(--border);border-radius:6px;background:var(--white);font-size:12px;color:var(--text);cursor:pointer;transition:background .12s;text-decoration:none; }
+.btn-pdf:hover { background:var(--gray-bg); }
+.resume-layout { display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:start; }
+.resume-nav { background:var(--white);border:0.5px solid var(--border);border-radius:10px;overflow:hidden; }
+.resume-nav-item { display:block;padding:11px 14px;font-size:13px;color:var(--text);border-bottom:0.5px solid var(--border);transition:background .1s; }
+.resume-nav-item:last-child { border-bottom:none; }
+.resume-nav-item:hover  { background:var(--gray-bg); }
+.resume-nav-item.active { background:var(--blue-light);color:var(--blue);font-weight:600; }
+.resume-body { background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:20px 24px; }
+.resume-section-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:16px; }
+.resume-section-title  { font-size:16px;font-weight:700;color:var(--navy); }
+.resume-table { width:100%;border-collapse:collapse;font-size:13px; }
+.resume-table th,.resume-table td { border:0.5px solid var(--border);padding:10px 14px;vertical-align:top;line-height:1.65; }
+.resume-table th { background:var(--gray-bg);width:200px;font-weight:600;color:var(--navy);white-space:nowrap; }
+.lock-badge { display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--text-muted);margin-left:8px;border:0.5px solid var(--border);border-radius:4px;padding:1px 6px; }
+.badge-required { display:inline-block;background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:600; }
+.badge-current  { display:inline-block;background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:4px;margin-left:8px; }
+.career-card { border:0.5px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:12px; }
+.career-card-header { display:flex;align-items:center;gap:8px;margin-bottom:8px; }
+.career-period { font-size:12px;color:var(--text-muted);flex:1; }
+.career-company { font-size:14px;font-weight:700;color:var(--navy);margin:0 0 4px; }
+.career-meta    { font-size:12px;color:var(--text-muted);margin-bottom:4px; }
+.career-pos     { font-size:12px;color:var(--text);margin-bottom:6px; }
+.career-desc    { font-size:13px;line-height:1.7;white-space:pre-wrap; }
+.btn-edit-sm { font-size:11px;padding:3px 10px;border:1px solid var(--blue);color:var(--blue);border-radius:4px;background:transparent;cursor:pointer;text-decoration:none; }
+.btn-delete-sm { font-size:11px;padding:3px 10px;border:1px solid var(--red);color:var(--red);border-radius:4px;background:transparent;cursor:pointer;font-family:inherit; }
+.btn-add  { font-size:12px;padding:5px 14px;background:var(--blue);color:#fff;border-radius:6px;text-decoration:none; }
+.btn-edit { display:inline-block;font-size:13px;padding:7px 24px;border:1px solid var(--border);border-radius:6px;background:var(--white);cursor:pointer;text-decoration:none;color:var(--text); }
+.btn-edit:hover { background:var(--gray-bg); }
+.resume-actions { margin-top:16px; }
+.resume-empty   { color:var(--text-muted);font-size:13px;padding:20px 0; }
+.resume-form-table { width:100%;border-collapse:collapse;font-size:13px; }
+.resume-form-table th,.resume-form-table td { border:0.5px solid var(--border);padding:12px 14px;vertical-align:top; }
+.resume-form-table th { background:var(--gray-bg);width:200px;font-weight:600;color:var(--navy);white-space:nowrap; }
+.form-input { border:0.5px solid var(--border);border-radius:5px;padding:7px 10px;font-size:13px;font-family:inherit;width:100%;outline:none; }
+.form-input:focus   { border-color:var(--blue); }
+.form-input--sm     { width:auto;min-width:160px; }
+.form-select { border:0.5px solid var(--border);border-radius:5px;padding:7px 10px;font-size:13px;font-family:inherit;background:var(--white);cursor:pointer; }
+.form-select--sm { width:auto; }
+.form-textarea { border:0.5px solid var(--border);border-radius:5px;padding:8px 10px;font-size:13px;font-family:inherit;width:100%;resize:vertical;outline:none;line-height:1.7; }
+.form-textarea:focus { border-color:var(--blue); }
+.form-inline  { display:flex;gap:8px;align-items:center;flex-wrap:wrap; }
+.form-stack   { display:flex;flex-direction:column;gap:6px; }
+.form-label   { font-size:11px;color:var(--text-muted); }
+.form-hint    { font-size:11px;color:var(--text-muted);margin-top:2px; }
+.form-actions { display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:0.5px solid var(--border); }
+.btn-save { padding:9px 28px;background:var(--navy);color:#fff;border:none;border-radius:6px;font-size:13px;font-family:inherit;font-weight:600;cursor:pointer; }
+.btn-save:hover   { background:var(--navy-mid); }
+.btn-cancel { padding:9px 20px;border:0.5px solid var(--border);border-radius:6px;background:var(--white);font-size:13px;color:var(--text);text-decoration:none; }
+.btn-cancel:hover { background:var(--gray-bg); }
+.btn-zip-search { padding:7px 14px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:12px;font-family:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .12s;flex-shrink:0; }
+.btn-zip-search:hover    { background:#2d68c0; }
+.btn-zip-search:disabled { background:#9ca3af;cursor:wait; }

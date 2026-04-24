@@ -1,80 +1,56 @@
 <?php
-// app/Models/JobModel.php
+namespace App\Models;
 
-class JobModel {
-
-    /** 求人一覧（会社名・タグ含む） */
+class JobModel extends BaseModel {
     public function findAll(array $filters = []): array {
-        $where  = ['j.status = :status'];
-        $params = [':status' => 'active'];
-
+        $where_conditions = ["j.status = 'active'"]; 
+        $parameters = [];
         if (!empty($filters['keyword'])) {
-            $where[]              = '(j.title LIKE :kw OR c.name LIKE :kw OR j.work_description LIKE :kw)';
-            $params[':kw']        = '%' . $filters['keyword'] . '%';
+            $where_conditions[] = "(j.title LIKE :keyword_title OR c.name LIKE :keyword_company_name OR j.location LIKE :keyword_location)";
+            $keyword_pattern = '%' . $filters['keyword'] . '%';
+            $parameters[':keyword_title'] = $keyword_pattern;
+            $parameters[':keyword_company_name'] = $keyword_pattern;
+            $parameters[':keyword_location'] = $keyword_pattern;
         }
-        if (!empty($filters['location'])) {
-            $where[]              = 'j.location LIKE :loc';
-            $params[':loc']       = '%' . $filters['location'] . '%';
+        if (!empty($filters['location'])) { 
+            $where_conditions[] = "j.location LIKE :location"; 
+            $parameters[':location'] = '%' . $filters['location'] . '%'; 
         }
-        if (isset($filters['remote']) && $filters['remote'] === '1') {
-            $where[] = 'j.remote_work = 1';
-        }
-        if (isset($filters['flex']) && $filters['flex'] === '1') {
-            $where[] = 'j.flex_time = 1';
-        }
+        if (!empty($filters['remote'])) { $where_conditions[] = "j.remote_work = 1"; }
+        if (!empty($filters['flex']))   { $where_conditions[] = "j.flex_time = 1"; }
+        
+        $order = match($filters['sort'] ?? '') { 
+            'salary_max DESC' => 'j.salary_max DESC', 
+            'created_at ASC' => 'j.created_at ASC', 
+            default => 'j.created_at DESC' 
+        };
 
-        $allowedSort = ['created_at DESC', 'salary_max DESC', 'created_at ASC'];
-        $sort = in_array($filters['sort'] ?? '', $allowedSort, true) ? $filters['sort'] : 'created_at DESC';
+        $sql = "SELECT j.*, c.name AS company_name FROM jobs j JOIN companies c ON c.id = j.company_id WHERE " . implode(' AND ', $where_conditions) . " ORDER BY $order";
+        $statement = $this->db->prepare($sql); 
+        $statement->execute($parameters);
+        $job_list = $statement->fetchAll();
 
-        $sql = 'SELECT j.*, c.name AS company_name
-                FROM jobs j
-                JOIN companies c ON c.id = j.company_id
-                WHERE ' . implode(' AND ', $where) . '
-                ORDER BY j.' . $sort;
-
-        $stmt = db()->prepare($sql);
-        $stmt->execute($params);
-        $jobs = $stmt->fetchAll();
-
-        // タグ付与
-        foreach ($jobs as &$job) {
-            $job['tags'] = $this->findTagsByJobId($job['id']);
+        foreach ($job_list as &$job_row) {
+            $tag_statement = $this->db->prepare('SELECT tag FROM job_tags WHERE job_id = ?'); 
+            $tag_statement->execute([$job_row['id']]);
+            $job_row['tags'] = array_column($tag_statement->fetchAll(), 'tag');
         }
-        return $jobs;
+        return $job_list;
     }
-
-    /** 求人1件（会社情報含む） */
     public function findById(int $id): ?array {
-        $sql = 'SELECT j.*, c.name AS company_name,
-                    c.description AS company_description,
-                    c.industry, c.employees, c.founded, c.website, c.address
-                FROM jobs j
-                JOIN companies c ON c.id = j.company_id
-                WHERE j.id = :id AND j.status = :status
-                LIMIT 1';
-        $stmt = db()->prepare($sql);
-        $stmt->execute([':id' => $id, ':status' => 'active']);
-        $job = $stmt->fetch();
-        if (!$job) return null;
-
-        $job['tags'] = $this->findTagsByJobId($id);
-        return $job;
+        $stmt = $this->db->prepare('SELECT j.*,c.name AS company_name,c.description AS company_desc,c.industry,c.employees,c.founded,c.website,c.address AS company_address FROM jobs j JOIN companies c ON c.id=j.company_id WHERE j.id=? LIMIT 1');
+        $stmt->execute([$id]); $job = $stmt->fetch(); if (!$job) return null;
+        $s = $this->db->prepare('SELECT tag FROM job_tags WHERE job_id=?'); $s->execute([$id]);
+        $job['tags'] = array_column($s->fetchAll(),'tag'); return $job;
     }
-
-    /** 応募済みかどうか（セッションのダミー実装） */
     public function isApplied(int $jobId): bool {
-        $applied = $_SESSION['applied'] ?? [];
-        return in_array($jobId, $applied, true);
+        $me = auth_user(); if (!$me) return false;
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM applications WHERE user_id=? AND job_id=?');
+        $stmt->execute([$me['id'],$jobId]); return (int)$stmt->fetchColumn()>0;
     }
-
-    /** 応募を記録（セッション） */
     public function apply(int $jobId): void {
-        $_SESSION['applied'][] = $jobId;
-    }
-
-    private function findTagsByJobId(int $jobId): array {
-        $stmt = db()->prepare('SELECT tag FROM job_tags WHERE job_id = :id');
-        $stmt->execute([':id' => $jobId]);
-        return array_column($stmt->fetchAll(), 'tag');
+        $me = auth_user(); if (!$me) return;
+        $stmt = $this->db->prepare('INSERT IGNORE INTO applications (user_id,job_id) VALUES (?,?)');
+        $stmt->execute([$me['id'],$jobId]);
     }
 }

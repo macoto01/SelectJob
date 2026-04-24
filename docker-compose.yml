@@ -38,8 +38,19 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      #   - ./database:/docker-entrypoint-initdb.d  # schema.sqlを自動実行
-
+      - ./database:/docker-entrypoint-initdb.d  # schema.sqlを自動実行
+  phpmyadmin:
+      image: phpmyadmin
+      container_name: jobnext_phpmyadmin
+      restart: always
+      depends_on:
+        - db
+      environment:
+        - PMA_ARBITRARY=1 # 任意のサーバーに接続できるようにする設定
+        - PMA_HOST=db       # docker内のサービス名「db」を指定
+        - PMA_USER=root
+        - PMA_PASSWORD=password
+      ports:
+        - "8070:80" # ブラウザで http://localhost:8070 でアクセス可能に
 volumes:
   mysql_data:

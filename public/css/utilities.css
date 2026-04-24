@@ -1,0 +1,121 @@
+/* public/css/utilities.css - 汎用コンポーネント */
+.btn-primary { display:inline-block;background:var(--blue);color:#fff;border-radius:6px;padding:10px 24px;font-size:14px;font-weight:600;text-decoration:none; }
+.btn-primary:hover { background:#2d68c0; }
+.btn-back { display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border:0.5px solid var(--border);border-radius:7px;background:var(--white);font-size:13px;color:var(--text);text-decoration:none;transition:background .12s;flex-shrink:0; }
+.btn-back:hover { background:var(--gray-bg); }
+/* フラッシュ（.flash で統一） */
+.flash { border-radius:7px;padding:10px 16px;margin-bottom:16px;font-size:13px;border:1px solid transparent; }
+.flash--success { background:#f0fdf4;color:#166534;border-color:#86efac; }
+.flash--error   { background:#fef2f2;color:#b91c1c;border-color:#fca5a5; }
+/* ページヘッダー（snippet: page_header.php） */
+.page-header { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px; }
+.page-header__left  { display:flex;align-items:center;gap:12px; }
+.page-header__right { display:flex;align-items:center;gap:8px; }
+.page-header__title { font-size:18px;font-weight:700;color:var(--navy); }
+.page-header__subtitle { font-size:12px;color:var(--text-muted);margin-top:2px; }
+/* ユーザーアバターセル（snippet: user_avatar_cell.php） */
+.user-avatar-cell { display:flex;align-items:center;gap:8px; }
+.user-avatar { border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0; }
+.user-avatar-cell__name  { font-size:13px;font-weight:600;color:var(--navy); }
+.user-avatar-cell__email { font-size:11px;color:var(--text-muted);margin-top:1px; }
+/* ステータスバッジ */
+.admin-status { display:inline-block;font-size:11px;font-weight:600;padding:2px 10px;border-radius:20px; }
+.admin-status--active { background:#dcfce7;color:#166534; }
+.admin-status--closed { background:#f3f4f6;color:#6b7280; }
+.user-role-badge { display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px; }
+.user-role-badge--admin { background:#fef3c7;color:#92400e; }
+.user-role-badge--user  { background:#e0f2fe;color:#0369a1; }
+/* レスポンシブ */
+@media (max-width:768px) {
+  .sidebar { display:none; }
+  .main    { margin-left:0; }
+  .table-header,.job-row { grid-template-columns:1fr 110px; }
+  .job-salary { display:none; }
+  .detail-table th { width:110px;font-size:11px; }
+  .detail-header { flex-direction:column; }
+}
+
+/* ─── 設定画面 ──────────────────────────────── */
+.settings-wrap { display:flex;flex-direction:column;gap:16px; }
+.settings-card { background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:24px 28px; }
+.settings-title { font-size:15px;font-weight:700;color:var(--navy);margin-bottom:20px;padding-bottom:12px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:8px; }
+
+.settings-row { display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:start;margin-bottom:16px; }
+.settings-row:last-child { margin-bottom:0; }
+.settings-label { font-size:13px;font-weight:600;color:var(--navy);padding-top:6px; }
+
+/* テーマスウォッチ */
+.settings-themes { display:flex;gap:10px;flex-wrap:wrap; }
+.theme-swatch {
+  width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:3px solid transparent;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .12s,border-color .12s;
+}
+.theme-swatch:hover { transform:scale(1.1); }
+.theme-swatch.active { border-color:var(--blue);box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--blue); }
+.theme-check { opacity:0;transition:opacity .15s; }
+.theme-swatch.active .theme-check { opacity:1; }
+
+/* 背景スウォッチ */
+.settings-bgs { display:flex;gap:8px;flex-wrap:wrap; }
+.bg-swatch {
+  padding:6px 12px;border-radius:8px;cursor:pointer;
+  border:2px solid var(--border);
+  display:flex;align-items:center;gap:6px;font-size:12px;
+  transition:border-color .12s;position:relative;
+}
+.bg-swatch:hover { border-color:var(--blue); }
+.bg-swatch.active { border-color:var(--blue);background:var(--blue-light); }
+.bg-swatch .theme-check { opacity:0; }
+.bg-swatch.active .theme-check { opacity:1; }
+.bg-swatch-label { font-size:11px; }
+
+/* フォントサイズ・サイドバー幅ボタン */
+.settings-font-sizes,
+.settings-sidebar-widths { display:flex;gap:8px; }
+.font-size-btn,
+.sidebar-width-btn {
+  padding:6px 14px;border:0.5px solid var(--border);border-radius:6px;
+  background:var(--white);font-size:12px;font-family:inherit;cursor:pointer;
+  transition:all .12s;
+}
+.font-size-btn:hover,
+.sidebar-width-btn:hover { background:var(--gray-bg); }
+.font-size-btn.active,
+.sidebar-width-btn.active { background:var(--navy);color:#fff;border-color:var(--navy); }
+
+.settings-reset-btn {
+  padding:6px 16px;border:0.5px solid var(--red);border-radius:6px;
+  background:var(--white);color:var(--red);font-size:12px;font-family:inherit;cursor:pointer;
+  transition:background .12s;
+}
+.settings-reset-btn:hover { background:#fef2f2; }
+
+/* フォームレイアウト */
+.settings-form-row { display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:center;margin-bottom:14px; }
+.settings-input { width:100%;padding:9px 12px;border:0.5px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s; }
+.settings-input:focus { border-color:var(--blue); }
+.settings-form-footer { display:flex;justify-content:flex-end;padding-top:16px;border-top:0.5px solid var(--border);margin-top:4px; }
+
+/* アカウント情報 */
+.settings-info-row { display:flex;gap:16px;padding:10px 0;border-bottom:0.5px solid var(--border); }
+.settings-info-row:last-child { border-bottom:none; }
+.settings-info-label { font-size:13px;font-weight:600;color:var(--navy);min-width:140px; }
+.settings-info-value { font-size:13px;color:var(--text); }
+
+/* ─── サイドバー設定リンク ──────────────────── */
+.sidebar-settings-link { border-top:0.5px solid rgba(255,255,255,.08);padding:4px 0; }
+
+/* ─── テーマCSS変数 ─────────────────────────── */
+[data-theme="green"]  { --navy:#1a4a2b;--navy-mid:#245c38; }
+[data-theme="purple"] { --navy:#2d1a4a;--navy-mid:#3a2459; }
+[data-theme="dark"]   { --navy:#111111;--navy-mid:#222222;--gray-bg:#1a1a1a;--white:#2a2a2a;--text:#e0e0e0;--border:rgba(255,255,255,.12); }
+[data-theme="slate"]  { --navy:#2d3748;--navy-mid:#3a4a5c; }
+
+/* 背景パターン */
+[data-bg="white"]   .main { background:#ffffff; }
+[data-bg="warm"]    .main { background:#faf8f5; }
+[data-bg="dark"]    .main { background:#1a1a2e; }
+[data-bg="dots"]    .main { background:#f0f4ff;background-image:radial-gradient(#d0d8f0 1px,transparent 1px);background-size:20px 20px; }
+[data-bg="grid"]    .main { background:#f8fafc;background-image:linear-gradient(#e2e8f0 1px,transparent 1px),linear-gradient(90deg,#e2e8f0 1px,transparent 1px);background-size:24px 24px; }

@@ -1,9 +1,26 @@
 Options -MultiViews
 RewriteEngine On
 
-# public/ 配下のファイルが実在すればそのまま返す
+AddDefaultCharset UTF-8
+<IfModule mod_php.c>
+    php_value default_charset "UTF-8"
+    php_value mbstring.internal_encoding "UTF-8"
+    php_value mbstring.http_output "UTF-8"
+    php_value mbstring.language "Japanese"
+</IfModule>
+<IfModule mod_php8.c>
+    php_value default_charset "UTF-8"
+    php_value mbstring.internal_encoding "UTF-8"
+    php_value mbstring.http_output "UTF-8"
+    php_value mbstring.language "Japanese"
+</IfModule>
+<IfModule mod_php7.c>
+    php_value default_charset "UTF-8"
+    php_value mbstring.internal_encoding "UTF-8"
+    php_value mbstring.http_output "UTF-8"
+    php_value mbstring.language "Japanese"
+</IfModule>
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# それ以外はすべて index.php へ
 RewriteRule ^ index.php [QSA,L]
