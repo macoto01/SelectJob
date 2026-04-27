@@ -44,8 +44,8 @@ require BASE_PATH . '/app/Views/snippets/flash.php';
       <label class="admin-label">権限</label>
       <div class="admin-form-col">
         <select name="role" class="admin-select admin-select--sm">
-          <option value="user"  <?= ($user['role']??'user')==='user' ?'selected':'' ?>>一般ユーザー</option>
-          <option value="admin" <?= ($user['role']??'')==='admin'?'selected':'' ?>>管理者</option>
+          <option value="user"  <?= ($user['role']??'user')==='user' ?'selected':'' ?>><?= lang('role.user') ?></option>
+          <option value="admin" <?= ($user['role']??'')==='admin'?'selected':'' ?>><?= lang('role.admin') ?></option>
         </select>
       </div>
     </div>

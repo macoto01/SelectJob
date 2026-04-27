@@ -34,8 +34,8 @@ require BASE_PATH . '/app/Views/snippets/flash.php';
           <p style="font-size:18px;font-weight:700;color:var(--navy);"><?= h($user['name']) ?></p>
           <p style="font-size:12px;color:var(--text-muted);margin-top:2px;"><?= h($user['email']) ?></p>
           <div style="display:flex;gap:6px;margin-top:6px;">
-            <?php $badgeValue=$user['role'];$badgeLabel=$user['role']==='admin'?'管理者':'一般ユーザー';$badgeType='role';require BASE_PATH.'/app/Views/snippets/status_badge.php'; ?>
-            <?php $badgeValue=$user['is_active']?'active':'closed';$badgeLabel=$user['is_active']?'有効':'無効';$badgeType='status';require BASE_PATH.'/app/Views/snippets/status_badge.php'; ?>
+            <?php $badgeValue=$user['role'];$badgeLabel=$user['role']==='admin'?lang('role.admin'):lang('role.user');$badgeType='role';require BASE_PATH.'/app/Views/snippets/status_badge.php'; ?>
+            <?php $badgeValue=$user['is_active']?'active':'closed';$badgeLabel=$user['is_active']?lang('active'):lang('inactive');$badgeType='status';require BASE_PATH.'/app/Views/snippets/status_badge.php'; ?>
           </div>
         </div>
       </div>
@@ -43,8 +43,8 @@ require BASE_PATH . '/app/Views/snippets/flash.php';
         <tr><th style="width:160px;">ユーザーID</th><td><?= (int)$user['id'] ?></td></tr>
         <tr><th>氏名</th><td><?= h($user['name']) ?></td></tr>
         <tr><th>メールアドレス</th><td><?= h($user['email']) ?></td></tr>
-        <tr><th>権限</th><td><?= $user['role']==='admin'?'管理者':'一般ユーザー' ?></td></tr>
-        <tr><th>ステータス</th><td><?= $user['is_active']?'有効':'無効（ログイン不可）' ?></td></tr>
+        <tr><th>権限</th><td><?= $user['role']==='admin'?lang('role.admin'):lang('role.user'); ?></td></tr>
+        <tr><th>ステータス</th><td><?= $user['is_active']?lang('active'):lang('inactive') ?></td></tr>
         <tr><th>最終ログイン</th><td><?= $user['last_login_at']?date('Y年m月d日 H:i',strtotime($user['last_login_at'])):'未ログイン' ?></td></tr>
         <tr><th>登録日時</th><td><?= date('Y年m月d日 H:i',strtotime($user['created_at'])) ?></td></tr>
       </table>

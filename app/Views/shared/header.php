@@ -7,7 +7,7 @@ mb_internal_encoding('UTF-8'); mb_http_output('UTF-8');
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JobNext - 転職管理マイページやで</title>
+<title>SelectJob - 転職管理マイページ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= h(base_url('/css/style.css')) ?>">

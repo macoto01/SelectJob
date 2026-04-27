@@ -39,10 +39,5 @@
     <div style="text-align:right;margin-top:8px;margin-bottom:4px;">
       <a href="<?= h(base_url('/forgot-password')) ?>" style="font-size:12px;color:var(--blue);">パスワードをお忘れの方はこちら</a>
     </div>
-    <div class="login-demo">
-      <p>デモアカウント（パスワード: <strong>password</strong>）</p>
-      <div class="login-demo-item"><strong>一般ユーザー</strong>：kiryu@example.com</div>
-      <div class="login-demo-item"><strong>管理者</strong>：admin@SelectJob.jp</div>
-    </div>
   </div>
 </div>

@@ -4,9 +4,12 @@ $navItems  = require BASE_PATH . '/config/nav.php';
 $me        = auth_user();
 $isAdmin   = auth_check_role('admin');
 $chatUnreadCount = 0;
-if ($me && class_exists('ChatModel')) {
-    $cm = new ChatModel();
-    $chatUnreadCount = $isAdmin ? $cm->getUnreadCountForAdmin() : $cm->getUnreadCountForUser($me['id']);
+
+if ($me && class_exists('\App\Models\ChatModel')) {
+    $chatModel = new \App\Models\ChatModel();
+    $chatUnreadCount = $isAdmin 
+        ? (int)$chatModel->getUnreadCountForAdmin() 
+        : (int)$chatModel->getUnreadCountForUser($me['id'] ?? 0);
 }
 ?>
 <div class="layout">
@@ -49,7 +52,7 @@ if ($me && class_exists('ChatModel')) {
         <div class="sidebar-user">
           <div class="sidebar-user-info">
             <p class="sidebar-user-name"><?= h($me['name']) ?></p>
-            <p class="sidebar-user-role"><?= $isAdmin?'管理者':'一般ユーザー' ?></p>
+            <p class="sidebar-user-role"><?= $isAdmin?lang('role.admin'):lang('role.user') ?></p>
           </div>
         </div>
         <a href="<?= h(base_url('/logout')) ?>" class="sidebar-logout-btn" onclick="return confirm('ログアウトしますか？')">
