@@ -1,5 +1,7 @@
 # SelectJob - PHP MVC 転職サイト
 ## ディレクトリ構成
+
+```
 SelectJob
 ├── .devcontainer/               # VSCode 開発コンテナ設定
 │   └── devcontainer.json
@@ -36,6 +38,7 @@ SelectJob
 ├── .gitignore                   # Git除外設定
 ├── docker-compose.yml           # Dockerコンテナ構成定義
 └── vendor/                      # Composer 外部ライブラリ（Git管理対象外）
+```
 
 ---
 
