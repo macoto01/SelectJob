@@ -1,69 +1,41 @@
-# JobNext - PHP MVC 転職サイト
-
+# SelectJob - PHP MVC 転職サイト
 ## ディレクトリ構成
-
-```
-jobnext/
-├── public/                          ← Webサーバーのドキュメントルート
-│   ├── index.php                    エントリーポイント
-│   ├── .htaccess                    URLリライト (Apache)
-│   ├── css/
-│   │   ├── style.css                ★ エントリー（@import でまとめるだけ）
-│   │   ├── base.css                 リセット・CSS変数・body
-│   │   ├── layout.css               .layout / サイドバー / トップバー / .content
-│   │   ├── jobs.css                 求人検索・一覧テーブル
-│   │   ├── dashboard.css            Homeダッシュボード（タブ・アドバイザー）
-│   │   ├── resume.css               履歴書ページ（閲覧・編集フォーム）
-│   │   └── utilities.css            汎用ボタン・レスポンシブ
-│   └── js/
-│       └── main.js                  タブ切り替えなど UI スクリプト
-│
-├── routes/
-│   └── web.php                      ルーティングテーブル（URLパターン定義）
-│
-├── config/
-│   ├── database.php                 DB接続設定（PDO）
-│   └── nav.php                      ★ サイドバーナビの定義（追加・順序変更はここ）
-│
-├── app/
+SelectJob
+├── .devcontainer/               # VSCode 開発コンテナ設定
+│   └── devcontainer.json
+├── .docker/                     # Docker環境詳細設定
+│   ├── nginx/
+│   │   └── default.conf         # Nginx サーバー設定
+│   └── php/
+│       └── Dockerfile           # PHP-FPM イメージビルド定義
+├── app/                         # アプリケーションのメインロジック
+│   ├── Controllers/             # 各機能のコントローラー（Auth, Admin, Job, etc.）
 │   ├── Helpers/
-│   │   └── helpers.php              ★ h() / base_url() / salary_label() / ym() を一元管理
-│   │
-│   ├── Controllers/
-│   │   ├── BaseController.php       render / redirect / flash / input を共通化
-│   │   ├── JobController.php        求人一覧・詳細・応募
-│   │   └── ResumeController.php     履歴書 閲覧・編集・保存・削除・PDF
-│   │
-│   ├── Models/
-│   │   ├── JobModel.php             求人 DB操作
-│   │   ├── CompanyModel.php         会社 DB操作
-│   │   └── ResumeModel.php          履歴書 DB操作（upsert/deleteRow で重複排除）
-│   │
-│   └── Views/
-│       ├── shared/
-│       │   ├── header.php           HTMLヘッド・CSSリンク
-│       │   ├── footer.php           フッター・JSリンク
-│       │   └── 404.php              404ページ
-│       ├── snippets/
-│       │   ├── sidebar.php          サイドバー（config/nav.php を読み込む）
-│       │   ├── topbar.php           トップバー
-│       │   ├── home_dashboard.php   Homeダッシュボード Snippet
-│       │   ├── job_search_form.php  検索フォーム Snippet
-│       │   └── job_list_table.php   求人一覧テーブル Snippet
-│       ├── jobs/
-│       │   ├── index.php            求人一覧ページ
-│       │   └── show.php             求人詳細ページ
-│       └── resume/
-│           ├── index.php            履歴書 閲覧ページ
-│           ├── edit.php             履歴書 編集フォーム
-│           ├── pdf_resume.php       履歴書 PDF
-│           ├── pdf_career.php       職務経歴書 PDF
-│           └── pdf_career_en.php    英文職務経歴書 PDF
-│
-└── database/
-    ├── schema.sql                   求人・会社テーブル＋サンプルデータ
-    └── resume_schema.sql            履歴書テーブル＋サンプルデータ
-```
+│   │   └── helpers.php          # グローバル関数（h, base_url等）
+│   ├── Models/                  # DB操作クラス（JobModel, ChatModel等）
+│   └── Views/                   # 画面テンプレート
+│       └── shared/
+│           ├── layout.php       # 共通レイアウト（サイドバー等）
+│           ├── header.php
+│           ├── footer.php
+│           └── 404.php
+├── config/                      # 設定ファイル
+│   ├── database.php             # DB接続設定（環境変数読み込み）
+│   └── nav.php                  # サイドバーメニュー定義
+├── database/                    # SQLスキーマ・データ
+│   ├── schema.sql               # テーブル定義
+│   └── sample_schema.sql        # 初期サンプルデータ
+├── public/                      # Web公開ディレクトリ（ドキュメントルート）
+│   ├── index.php                # 全リクエストのエントリーポイント
+│   ├── js/
+│   │   └── main.js              # フロントエンドJavaScript
+│   └── .htaccess                # URLリライト設定（Apache用）
+├── routes/
+│   └── web.php                  # ルーティング定義と実行ロジック
+├── .env                         # 環境変数（Git管理対象外）
+├── .gitignore                   # Git除外設定
+├── docker-compose.yml           # Dockerコンテナ構成定義
+└── vendor/                      # Composer 外部ライブラリ（Git管理対象外）
 
 ---
 
@@ -81,7 +53,7 @@ mysql -u root -p < database/auth_schema.sql
 
 ```bash
 export DB_HOST=localhost
-export DB_NAME=jobnext
+export DB_NAME=SelectJob
 export DB_USER=root
 export DB_PASS=yourpassword
 ```
@@ -91,7 +63,7 @@ export DB_PASS=yourpassword
 ### 3. 起動
 
 ```bash
-cd jobnext/public
+cd SelectJob/public
 php -S localhost:8000
 ```
 

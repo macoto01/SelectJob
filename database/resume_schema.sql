@@ -1,5 +1,5 @@
 -- database/resume_schema.sql
-USE jobnext;
+USE SelectJob;
 
 CREATE TABLE IF NOT EXISTS resume_basic (
     id                INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

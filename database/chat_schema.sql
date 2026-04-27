@@ -1,5 +1,5 @@
 -- database/chat_schema.sql
-USE jobnext;
+USE SelectJob;
 
 CREATE TABLE IF NOT EXISTS chat_rooms (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

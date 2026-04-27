@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="adv-meta">
-      <div><p class="adv-meta-label">メールアドレス</p><p class="adv-meta-value adv-meta-value--link">miho.goto@jobnext.co.jp</p></div>
+      <div><p class="adv-meta-label">メールアドレス</p><p class="adv-meta-value adv-meta-value--link">miho.goto@SelectJob.co.jp</p></div>
       <div><p class="adv-meta-label">携帯電話番号<br><span style="font-size:9px;opacity:.7;">（平日 10:00〜19:30）</span></p><p class="adv-meta-value adv-meta-value--bold">080-7422-9591</p></div>
     </div>
   </div>

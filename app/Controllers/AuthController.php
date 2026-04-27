@@ -60,8 +60,8 @@ class AuthController extends BaseController {
             $appUrl  = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
             $fullUrl = $appUrl . base_url('/reset-password?token=' . $token);
             
-            $body = "こんにちは、{$user['name']} 様\n\nパスワードリセット用リンク:\n{$fullUrl}\n\nこのリンクは1時間有効です。\n心当たりがない場合は無視してください。\n\nJobNext";
-            @mail($email, '【JobNext】パスワードリセットのご案内', $body, "From: noreply@jobnext.jp\r\nContent-Type: text/plain; charset=UTF-8");
+            $body = "こんにちは、{$user['name']} 様\n\nパスワードリセット用リンク:\n{$fullUrl}\n\nこのリンクは1時間有効です。\n心当たりがない場合は無視してください。\n\nSelectJob";
+            @mail($email, '【SelectJob】パスワードリセットのご案内', $body, "From: noreply@SelectJob.jp\r\nContent-Type: text/plain; charset=UTF-8");
         }
         $this->flash('メールアドレスにリセット用リンクを送信しました。');
         $this->redirect('/forgot-password');

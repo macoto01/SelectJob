@@ -18,7 +18,7 @@
 </style>
 <div class="login-wrap">
   <div class="login-card">
-    <div class="login-logo">JobNext</div>
+    <div class="login-logo">SelectJob</div>
     <div class="login-sub">転職管理マイページ</div>
     <?php if (!empty($flash['message'])): ?>
       <div class="login-flash login-flash--<?= h($flash['type']) ?>">
@@ -31,7 +31,7 @@
     <form method="post" action="<?= h(base_url('/login')) ?>">
       <?php require BASE_PATH . '/app/Views/snippets/csrf.php'; ?>
       <label class="login-label" for="email">メールアドレス</label>
-      <input class="login-input" type="email" id="email" name="email" value="<?= h($_POST['email']??'') ?>" placeholder="example@jobnext.jp" required autofocus>
+      <input class="login-input" type="email" id="email" name="email" value="<?= h($_POST['email']??'') ?>" placeholder="example@SelectJob.jp" required autofocus>
       <label class="login-label" for="password">パスワード</label>
       <input class="login-input" type="password" id="password" name="password" placeholder="パスワードを入力" required>
       <button type="submit" class="login-btn">ログイン</button>
@@ -42,7 +42,7 @@
     <div class="login-demo">
       <p>デモアカウント（パスワード: <strong>password</strong>）</p>
       <div class="login-demo-item"><strong>一般ユーザー</strong>：kiryu@example.com</div>
-      <div class="login-demo-item"><strong>管理者</strong>：admin@jobnext.jp</div>
+      <div class="login-demo-item"><strong>管理者</strong>：admin@SelectJob.jp</div>
     </div>
   </div>
 </div>

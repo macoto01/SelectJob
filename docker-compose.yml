@@ -21,9 +21,9 @@ services:
     environment:
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_NAME=jobnext
+      - DB_NAME=SelectJob
       - DB_USER=root
-      - DB_PASS=password
+      - DB_PASS=${DB_PASS}
     working_dir: /var/www/html
 
   # データベース (MySQL)
@@ -32,8 +32,8 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     platform: linux/amd64 # Mac M1/M2チップ等での動作を安定させるため
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=jobnext
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=SelectJob
     ports:
       - "3306:3306"
     volumes:
@@ -41,7 +41,7 @@ services:
       - ./database:/docker-entrypoint-initdb.d  # schema.sqlを自動実行
   phpmyadmin:
       image: phpmyadmin
-      container_name: jobnext_phpmyadmin
+      container_name: SelectJob_phpmyadmin
       restart: always
       depends_on:
         - db
@@ -49,7 +49,7 @@ services:
         - PMA_ARBITRARY=1 # 任意のサーバーに接続できるようにする設定
         - PMA_HOST=db       # docker内のサービス名「db」を指定
         - PMA_USER=root
-        - PMA_PASSWORD=password
+        - PMA_PASSWORD=${DB_PASS}
       ports:
         - "8070:80" # ブラウザで http://localhost:8070 でアクセス可能に
 volumes:

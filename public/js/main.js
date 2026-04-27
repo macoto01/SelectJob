@@ -1,7 +1,7 @@
 // ─── 設定テーマ・背景の適用（全ページ共通） ─────────────
 (function() {
   try {
-    var settings = JSON.parse(localStorage.getItem('jobnext_settings')) || {};
+    var settings = JSON.parse(localStorage.getItem('SelectJob_settings')) || {};
     var root = document.documentElement;
     if (settings.theme) root.dataset.theme = settings.theme;
     if (settings.bg)    root.dataset.bg    = settings.bg;

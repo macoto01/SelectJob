@@ -17,7 +17,7 @@
 </style>
 <div class="login-wrap">
   <div class="login-card">
-    <div class="login-logo">JobNext</div>
+    <div class="login-logo">SelectJob</div>
     <div class="login-sub">パスワードをお忘れの方</div>
     <?php if (!empty($flash['message'])): ?>
       <div class="login-flash login-flash--<?= h($flash['type']) ?>"><?= h($flash['message']) ?></div>
@@ -26,7 +26,7 @@
     <form method="post" action="<?= h(base_url('/forgot-password')) ?>">
 <?php require BASE_PATH . '/app/Views/snippets/csrf.php'; ?>
       <label class="login-label" for="email">メールアドレス</label>
-      <input class="login-input" type="email" id="email" name="email" placeholder="example@jobnext.jp" required autofocus>
+      <input class="login-input" type="email" id="email" name="email" placeholder="example@SelectJob.jp" required autofocus>
       <button type="submit" class="login-btn">リセットリンクを送信</button>
     </form>
     <a href="<?= h(base_url('/login')) ?>" class="login-back">← ログインに戻る</a>

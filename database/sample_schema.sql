@@ -5,7 +5,7 @@ SET NAMES utf8mb4;
 INSERT IGNORE INTO users (name, email, password, role, is_active) VALUES
 (
     '管理者',
-    'admin@jobnext.jp',
+    'admin@SelectJob.jp',
     '$2y$10$yRDX4EVoE/pz/kd5lm78GO/iOHNvZM32A5.ipHopy8xWGeOOiQRRy',
     'admin',
     1

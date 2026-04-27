@@ -1,11 +1,11 @@
 -- database/schema.sql
-CREATE DATABASE IF NOT EXISTS jobnext 
+CREATE DATABASE IF NOT EXISTS SelectJob 
   CHARACTER SET utf8mb4 
   COLLATE utf8mb4_unicode_ci;
 
-USE jobnext;
+USE SelectJob;
 
-ALTER DATABASE jobnext CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER DATABASE SelectJob CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS companies (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

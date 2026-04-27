@@ -1,5 +1,5 @@
 -- database/screening_schema.sql
-USE jobnext;
+USE SelectJob;
 
 CREATE TABLE IF NOT EXISTS screenings (
     id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

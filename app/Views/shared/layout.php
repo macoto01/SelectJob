@@ -13,7 +13,7 @@ if ($me && class_exists('ChatModel')) {
   <aside class="sidebar<?= $isAdmin ? ' sidebar--admin' : '' ?>">
     <div class="logo">
       <a href="<?= h(base_url('/')) ?>" style="text-decoration:none;">
-        <div class="logo-text">JobNext</div>
+        <div class="logo-text">SelectJob</div>
         <div class="logo-sub"><?= $isAdmin ? '管理者ページ' : '転職管理マイページ' ?></div>
       </a>
     </div>

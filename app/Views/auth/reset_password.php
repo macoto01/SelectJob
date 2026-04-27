@@ -16,7 +16,7 @@
 </style>
 <div class="login-wrap">
   <div class="login-card">
-    <div class="login-logo">JobNext</div>
+    <div class="login-logo">SelectJob</div>
     <div class="login-sub">新しいパスワードを設定</div>
     <?php if (!empty($flash['message'])): ?>
       <div class="login-flash login-flash--<?= h($flash['type']) ?>"><?= h($flash['message']) ?></div>
